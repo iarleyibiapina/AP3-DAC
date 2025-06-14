@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Listagem de Ar Condicionados</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:messages id="globalMessages" showDetail="true" autoUpdate="true" closable="true" />
+	
+        <p:dataTable id="tabela" value="#{arCondicionadoBean.arCondicionados}" var="ar" border="1" cellpadding="5" style="margin-top:20px;">
+        
+            <p:column headerText="ID">
+                #{ar.id}
+            </p:column>
+            <p:column headerText="Descrição">
+                #{ar.descricao}
+            </p:column>
+            <p:column headerText="Data de Manutenção">
+                <h:outputText value="#{ar.dataManutencao}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Temp. Atual">
+                #{ar.temperaturaAtual}
+            </p:column>
+            <p:column headerText="Ajustar temperatura">
+                <p:commandButton value="+" action="#{arCondicionadoBean.aumentarTemperatura}" update=":form:tabela :form:globalMessages" style="margin-left: 5px;">
+                    <f:setPropertyActionListener target="#{arCondicionadoBean.arCondicionado}" value="#{ar}" />
+                </p:commandButton>
+                <p:commandButton value="-" action="#{arCondicionadoBean.diminuirTemperatura}" update=":form:tabela :form:globalMessages" style="margin-left: 5px;">
+                    <f:setPropertyActionListener target="#{arCondicionadoBean.arCondicionado}" value="#{ar}" />
+                </p:commandButton>
+            </p:column>
+            <p:column headerText="Temp. Mínima">
+                #{ar.temperaturaMinima}
+            </p:column>
+            <p:column headerText="Temp. Máxima">
+                #{ar.temperaturaMaxima}
+            </p:column>
+            <p:column headerText="Dias até a proxima manutenção">
+                <p:commandButton value="Verificar" action="#{arCondicionadoBean.manutencao}" update=":form:globalMessages" style="margin-left: 5px;">
+                    <f:setPropertyActionListener target="#{arCondicionadoBean.arCondicionado}" value="#{ar}" />
+                </p:commandButton>
+            </p:column>
+<!--             EDITAR | DELETAR -->
+            <p:column headerText="Ações" style="text-align: center;">
+				<h:link value="Editar" outcome="editar" 
+					style="margin-left: 5px; width: 50px; height: 25px;"
+					styleClass="ui-button ui-button-text-only">
+				    <f:param name="id" value="#{ar.id}" />
+				</h:link>
+                |
+                <p:commandLink 
+                	value="Excluir" 
+                	action="#{arCondicionadoBean.deletar}" 
+                	update=":form:tabela :form:globalMessages" 
+                	style="margin-left: 5px; width: 50px; height: 25px;"
+                	styleClass="ui-button ui-button-danger"
+                	>
+                	
+                     <f:setPropertyActionListener target="#{arCondicionadoBean.arCondicionado}" value="#{ar}" />
+                </p:commandLink>
+            </p:column>
+        </p:dataTable>
+
+        <br/><br/>
+    </h:form>
+    <h:form>
+		<p:commandButton value="Voltar" action="index?faces-redirect=true" />
+		|
+ 		<p:commandButton value="Ar Condicionado com Maior Manutenção" action="#{arCondicionadoBean.redirecionarParaMaiorManutencao}" /> 
+	</h:form>
+</h:body>
+</html>
