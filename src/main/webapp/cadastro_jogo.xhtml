@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Cadastro de Jogo</title>
+    
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;   
+            padding: 20px; /* Adiciona um espaçamento */
+            min-height: 90vh;
+        }
+        
+        .content-panel {
+            width: 700px; /* Largura maior para o formulário de jogo */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <h:form id="formCadastro">
+            <p:growl id="growl" showDetail="true" />
+            
+            <p:panel header="Cadastrar Novo Jogo" styleClass="content-panel">
+                
+                <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" 
+                             columnClasses="ui-g-3,ui-g-3,ui-g-3,ui-g-3">
+                
+                    <p:outputLabel for="dataPartida" value="Data da Partida:" />
+                    <p:calendar id="dataPartida" value="#{jogoBean.jogo.dataPartida}"
+                                pattern="dd/MM/yyyy" required="true" requiredMessage="A data é obrigatória."/>
+
+                    <p:outputLabel for="campeonato" value="Campeonato:" />
+                    <p:selectOneMenu id="campeonato" value="#{jogoBean.jogo.campeonato.id}" 
+                                     required="true" requiredMessage="O campeonato é obrigatório.">
+                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+                        <f:selectItems value="#{campeonatoBean.campeonatos}" var="c"
+                                       itemLabel="#{c.nome}" itemValue="#{c.id}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="time1" value="Time 1:" />
+                    <p:selectOneMenu id="time1" value="#{jogoBean.jogo.time1}" required="true" requiredMessage="O Time 1 é obrigatório.">
+                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+                        <f:selectItem itemLabel="Time A" itemValue="A" />
+                        <f:selectItem itemLabel="Time B" itemValue="B" />
+                        <f:selectItem itemLabel="Time C" itemValue="C" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="gols1" value="Gols Time 1:" />
+                    <p:inputNumber id="gols1" value="#{jogoBean.jogo.golsTime1}" decimalPlaces="0" required="true" requiredMessage="Informe os gols."/>
+
+                    <p:outputLabel for="time2" value="Time 2:" />
+                    <p:selectOneMenu id="time2" value="#{jogoBean.jogo.time2}" required="true" requiredMessage="O Time 2 é obrigatório.">
+                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
+                        <f:selectItem itemLabel="Time A" itemValue="A" />
+                        <f:selectItem itemLabel="Time B" itemValue="B" />
+                        <f:selectItem itemLabel="Time C" itemValue="C" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="gols2" value="Gols Time 2:" />
+                    <p:inputNumber id="gols2" value="#{jogoBean.jogo.golsTime2}" decimalPlaces="0" required="true" requiredMessage="Informe os gols."/>
+                                     
+                </p:panelGrid>
+                
+                <f:facet name="footer">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <p:button value="Voltar para Opções" outcome="opcoes" icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
+<!--                             <p:button value="Ver Listagem" outcome="listagem" icon="pi pi-list" styleClass="ui-button-info" style="margin-left: 5px;" /> -->
+                        </div>
+                        
+                        <p:commandButton value="Salvar Jogo" action="#{jogoBean.salvar}"
+                                         update="growl @form" icon="pi pi-save" />
+                    </div>
+                </f:facet>
+                
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+
+</html>

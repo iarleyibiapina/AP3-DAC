@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Menu Principal - AP3</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Organiza header e o 'main' em coluna */
+            height: 100vh; /* Ocupa a altura total da tela */
+        }
+
+        .layout-header {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layout-main {
+            display: flex; /* Organiza menu e conteúdo lado a lado */
+            flex-grow: 1; /* Faz esta seção ocupar o espaço restante */
+            overflow: auto; /* Adiciona scroll se necessário */
+        }
+        
+        .layout-menu {
+            width: 280px; /* Largura fixa para o menu */
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+        }
+        
+        .layout-content {
+            padding: 20px;
+            flex-grow: 1; 
+    </style>
+</h:head>
+
+<h:body>
+    <div class="layout-header">
+        <span style="font-size: 1.5em; font-weight: bold;">Sistema de Campeonatos</span>
+        <h:form>
+            <div>
+                <span>Bem-vindo, <strong>#{loginBean.usuarioLogado.nome}</strong></span>
+                <p:commandButton value="Sair" action="#{loginBean.logout}" icon="pi pi-sign-out" style="margin-left: 20px;" ajax="false"/>
+            </div>
+        </h:form>
+    </div>
+
+    <div class="layout-main">
+        <div class="layout-menu">
+            <h3>Menu de Navegação</h3>
+            <p:panelMenu>
+                <p:submenu label="Cadastros">
+                    <p:menuitem value="Cadastrar Usuário" outcome="cadastro_usuario" />
+                    <p:menuitem value="Cadastrar Campeonato" outcome="cadastro_campeonato" />
+                    <p:menuitem value="Cadastrar Jogo" outcome="cadastro_jogo" />
+                </p:submenu>
+                <p:submenu label="Consultas">
+                    <p:menuitem value="Listar Usuários" outcome="listagem_usuarios" />
+                    <p:menuitem value="Listar Campeonatos" outcome="listagem_campeonatos" />
+                    <p:menuitem value="Listar Jogos" outcome="listagem_jogos" />
+                    <p:menuitem value="Filtrar Jogos por Time" outcome="filtro" />
+                </p:submenu>
+            </p:panelMenu>
+        </div>
+        
+        <div class="layout-content">
+            <h1>Seja bem-vindo ao sistema!</h1>
+            <p>Utilize o menu à esquerda para navegar entre as funcionalidades.</p>
+        </div>
+    </div>
+</h:body>
+</html>

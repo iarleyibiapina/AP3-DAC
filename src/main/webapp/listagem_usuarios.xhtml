@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Listagem de Usuários</title>
+    
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;   
+            height: 100%;
+            padding: 20px;
+        }
+        
+        .custom-panel {
+            width: 800px; /* Largura maior para a tabela */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <p:panel header="Listagem de Usuários Cadastrados" styleClass="custom-panel">
+            
+            <p:dataTable id="tabelaUsuarios" var="usuario" value="#{usuarioBean.usuarios}"
+                         paginator="true" rows="10"
+                         emptyMessage="Nenhum usuário encontrado.">
+                
+                <p:column headerText="ID" sortBy="#{usuario.id}" style="width: 80px; text-align: center;">
+                    <h:outputText value="#{usuario.id}" />
+                </p:column>
+                
+                <p:column headerText="Nome Completo" sortBy="#{usuario.nome}">
+                    <h:outputText value="#{usuario.nome}" />
+                </p:column>
+                
+                <p:column headerText="Login de Acesso" sortBy="#{usuario.login}">
+                    <h:outputText value="#{usuario.login}" />
+                </p:column>
+                
+                </p:dataTable>
+            
+            <f:facet name="footer">
+                <div style="text-align: left;">
+                    <p:button value="Voltar para Opções" outcome="opcoes" 
+                              icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
+                    <p:button value="Cadastrar usuario" outcome="cadastro_usuario" 
+                    		style="margin-left:10px;"
+                              styleClass="ui-button-primary" />
+                </div>
+            </f:facet>
+            
+        </p:panel>
+    </div>
+</h:body>
+</html>

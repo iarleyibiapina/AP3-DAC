@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Filtro de Jogos</title>
+    
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; 
+            align-items: flex-start; /* Alinha no topo para não centralizar verticalmente */
+            padding: 40px;
+        }
+        
+        .custom-panel {
+            width: 1000px; /* Largura maior para a tabela de resultados */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <h:form>
+            <p:growl id="growl" showDetail="true" />
+            
+            <p:panel header="Filtrar Jogos por Time" styleClass="custom-panel">
+                
+                <p:panelGrid columns="3" style="margin-bottom: 20px;" columnClasses="ui-g-2,ui-g-8,ui-g-2">
+                    <p:outputLabel for="time" value="Selecione o Time:" />
+                    <p:selectOneMenu id="time" value="#{jogoBean.timeFiltro}">
+                        <f:selectItem itemLabel="Selecione um time..." noSelectionOption="true" />
+                        <f:selectItem itemLabel="Time A" itemValue="A" />
+                        <f:selectItem itemLabel="Time B" itemValue="B" />
+                        <f:selectItem itemLabel="Time C" itemValue="C" />
+                    </p:selectOneMenu>
+                    
+                    <p:commandButton value="Localizar"
+                                     action="#{jogoBean.filtrarPorTime}" 
+                                     update="tabelaFiltro growl" 
+                                     icon="pi pi-search"/>
+                </p:panelGrid>
+
+                <p:dataTable id="tabelaFiltro" var="jogo"
+                             value="#{jogoBean.jogosFiltrados}"
+                             emptyMessage="Nenhum jogo encontrado para o time selecionado.">
+                    
+                    <p:column headerText="ID" style="width: 60px; text-align: center;">
+                        <h:outputText value="#{jogo.id}" />
+                    </p:column>
+                    
+                    <p:column headerText="Data" style="width: 120px;">
+                        <h:outputText value="#{jogo.dataPartida}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Fortaleza" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Partida">
+                        <h:outputText value="#{jogo.time1} #{jogo.golsTime1} x #{jogo.golsTime2} #{jogo.time2}" style="font-weight: bold;"/>
+                    </p:column>
+                    
+                    <p:column headerText="Campeonato">
+                        <h:outputText value="#{jogo.campeonato.nome}" />
+                    </p:column>
+                    
+                </p:dataTable>
+                
+                <f:facet name="footer">
+                    <div style="text-align: left;">
+                        <p:button value="Voltar para Opções" outcome="opcoes" 
+                                  icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
+                    </div>
+                </f:facet>
+                
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Cadastro de Usuário</title>
+    
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; 
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;   
+            height: 100%;
+        }
+        
+        .login-panel {
+            width: 500px; /* Aumentei um pouco a largura para caber o formulário confortavelmente */
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="login-container">
+        <h:form>
+            <p:growl id="growl" showDetail="true" />
+            
+            <p:panel header="Cadastro de Novo Usuário" styleClass="login-panel">
+                
+                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-g-4,ui-g-8">
+                
+                    <p:outputLabel for="nome" value="Nome Completo:" />
+                    <p:inputText id="nome" value="#{usuarioBean.usuario.nome}" required="true" 
+                                 requiredMessage="O campo Nome é obrigatório." style="width:100%"/>
+                                 
+                    <p:outputLabel for="login" value="Login de Acesso:" />
+                    <p:inputText id="login" value="#{usuarioBean.usuario.login}" required="true" 
+                                 requiredMessage="O campo Login é obrigatório." style="width:100%"/>
+                                 
+                    <p:outputLabel for="senha" value="Senha:" />
+                    <p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true" 
+                                requiredMessage="O campo Senha é obrigatório."
+                                match="senhaConfirma" feedback="true" style="width:100%"/>
+                                
+                    <p:outputLabel for="senhaConfirma" value="Confirmar Senha:" />
+                    <p:password id="senhaConfirma" required="true" 
+                                requiredMessage="A confirmação de senha é obrigatória." style="width:100%"/>
+                                     
+                </p:panelGrid>
+                
+                <f:facet name="footer">
+                    <div style="display: flex; justify-content: space-between;">
+                        <p:button value="Voltar para Opções" outcome="opcoes" icon="pi pi-arrow-left" 
+                                  styleClass="ui-button-secondary" />
+                        
+                        <p:commandButton value="Salvar Usuário" action="#{usuarioBean.salvar}" 
+                                         update="@form" icon="pi pi-check" />
+                    </div>
+                </f:facet>
+                
+            </p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>

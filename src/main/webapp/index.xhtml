@@ -1,90 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 <h:head>
-    <title>Cadastro de Ar Condicionado</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
-        .centered-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        .form-panel {
-            width: 400px;
-        }
-        .input-field {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        /* Sobrescrever estilos do PrimeFaces para inputs */
-        .ui-inputfield, .ui-calendar, .ui-spinner {
-            width: 100% !important;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-        /* Ajustar o botão do calendário */
-        .ui-datepicker-trigger {
-            vertical-align: middle;
-        }
-        /* Ajustar setas do inputNumber */
-        .ui-spinner-button {
-            height: 50%;
-            width: 20px;
-        }
-    </style>
+    <title>Página Inicial - AP3</title>
 </h:head>
-<h:body>
-    <div class="centered-container">
-        <h:form id="form">
-            <p:panel header="Criar Ar Condicionado" styleClass="form-panel">
 
-                <p:messages id="globalMessages" showDetail="true" autoUpdate="true" closable="true" />
+<h:body style="font-family: sans-serif; padding: 20px;">
 
-                <p:panelGrid columns="2" columnClasses="label,value" layout="grid" style="width: 100%;">
-                    <h:outputLabel for="descricao" value="Descrição:" />
-                    <p:inputText id="descricao" value="#{arCondicionadoBean.arCondicionado.descricao}"
-                                 required="true" requiredMessage="Descrição é obrigatória"
-                                 styleClass="input-field" />
+    <p:panel header="Bem-vindo ao Sistema de Campeonato">
+        <h:panelGrid columns="1" style="margin: 0 auto;">
+            
+            <p>Clique no botão abaixo para ir para a tela de login e acessar o sistema.</p>
+            
+            <p:button outcome="login" value="Acessar Login" icon="pi pi-sign-in" style="margin-top: 10px;" />
+            
+            </h:panelGrid>
+    </p:panel>
 
-                    <h:outputLabel for="dataManutencao" value="Data de Manutenção:" />
-                    <p:calendar id="dataManutencao" value="#{arCondicionadoBean.arCondicionado.dataManutencao}"
-                                pattern="dd/MM/yyyy" required="true" requiredMessage="Data de manutenção é obrigatória"
-                                styleClass="input-field" />
-
-                    <h:outputLabel for="temperaturaMinima" value="Temperatura Mínima (°C):" />
-                    <p:inputNumber id="temperaturaMinima"
-                                   value="#{arCondicionadoBean.arCondicionado.temperaturaMinima}"
-                                   decimalPlaces="0" required="true" requiredMessage="Temperatura mínima é obrigatória"
-                                   minValue="0" maxValue="100"
-                                   styleClass="input-field" />
-
-                    <h:outputLabel for="temperaturaMaxima" value="Temperatura Máxima (°C):" />
-                    <p:inputNumber id="temperaturaMaxima"
-                                   value="#{arCondicionadoBean.arCondicionado.temperaturaMaxima}"
-                                   decimalPlaces="0" required="true" requiredMessage="Temperatura máxima é obrigatória"
-                                   minValue="0" maxValue="100"
-                                   styleClass="input-field" />
-                </p:panelGrid>
-
-                <p:separator />
-                <p:commandButton value="Salvar"
-                                 action="#{arCondicionadoBean.salvar}"
-                                 update=":form:globalMessages :form"
-                                 style="width: 100%; margin-top: 10px;" />
-		        <h:link 
-		        	value="Ir para Listagem" outcome="listagem"
-		       		style="width: 100%; margin-top: 10px; height: 40px;"
-		        	styleClass="ui-button ui-button"
-		        	/>
-            </p:panel>
-        </h:form>
-    </div>
 </h:body>
 </html>
