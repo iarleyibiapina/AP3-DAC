@@ -42,7 +42,7 @@
             <p:panel header="Listagem de Campeonatos Cadastrados" styleClass="custom-panel">
                 <p:dataTable id="tabelaCampeonatos" var="campeonato" value="#{campeonatoBean.campeonatos}"
                              paginator="true" rows="10" emptyMessage="Nenhum campeonato encontrado.">
-                    
+                    	
                     <p:column headerText="ID" sortBy="#{campeonato.id}" style="width: 100px; text-align: center;">
                         <h:outputText value="#{campeonato.id}" />
                     </p:column>
@@ -71,6 +71,7 @@
                         <p:button value="Voltar para Opções" outcome="opcoes" icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
                         <p:button value="Cadastrar Campeonato" outcome="cadastro_campeonato" 
                     		style="margin-left:10px;"
+                    		icon="pi pi-plus"
                               styleClass="ui-button-primary" />
                     </div>
                 </f:facet>

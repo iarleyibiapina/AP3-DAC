@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/f/core"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -30,7 +30,7 @@
 
 <h:body>
     <div class="container">
-        <h:form>
+        <h:form id="formListagem">
             <p:panel header="Listagem de Jogos" styleClass="custom-panel">
                 
                 <p:dataTable id="tabelaJogos" var="jogo" value="#{jogoBean.jogos}"
@@ -58,14 +58,57 @@
                 </p:dataTable>
                 
                 <f:facet name="footer">
-                    <div style="text-align: left;">
-                        <p:button value="Voltar para Opções" outcome="opcoes" 
+                    <div style="display: flex; justify-content: space-between;">
+                    	<p:button value="Voltar para Opções" outcome="opcoes" 
                                   icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
+					 	<p:button value="Cadastrar um jogo" outcome="cadastro_jogo" 
+                                  icon="pi pi-plus" styleClass="ui-button-primary" />
+                        <p:commandButton value="Resumo do Campeonato"
+                                         actionListener="#{jogoBean.calcularResumo}"
+                                         oncomplete="PF('dialogResumo').show()"
+                                         update=":formResumo:tabelaResumo"
+                                         icon="pi pi-chart-bar" />
                     </div>
                 </f:facet>
                 
             </p:panel>
         </h:form>
     </div>
+    
+    <h:form id="formResumo">
+        <p:dialog header="Classificação do Campeonato" widgetVar="dialogResumo" 
+                  modal="true" width="850" responsive="true">
+                  
+            <p:dataTable id="tabelaResumo" var="time" value="#{jogoBean.resumoDosTimes}"
+                         sortBy="#{time.pontuacao}" sortOrder="descending">
+                         
+                <p:column headerText="Time" sortBy="#{time.nome}">
+                    <h:outputText value="#{time.nome}" />
+                </p:column>
+                <p:column headerText="P" sortBy="#{time.pontuacao}" style="font-weight:bold; text-align:center;">
+                    <h:outputText value="#{time.pontuacao}" />
+                </p:column>
+                <p:column headerText="V" sortBy="#{time.vitorias}" style="text-align:center;">
+                    <h:outputText value="#{time.vitorias}" />
+                </p:column>
+                <p:column headerText="E" sortBy="#{time.empates}" style="text-align:center;">
+                    <h:outputText value="#{time.empates}" />
+                </p:column>
+                <p:column headerText="D" sortBy="#{time.derrotas}" style="text-align:center;">
+                    <h:outputText value="#{time.derrotas}" />
+                </p:column>
+                <p:column headerText="GM" sortBy="#{time.golsMarcados}" style="text-align:center;">
+                    <h:outputText value="#{time.golsMarcados}" />
+                </p:column>
+                <p:column headerText="GS" sortBy="#{time.golsSofridos}" style="text-align:center;">
+                    <h:outputText value="#{time.golsSofridos}" />
+                </p:column>
+                <p:column headerText="SG" sortBy="#{time.saldoGols}" style="text-align:center;">
+                    <h:outputText value="#{time.saldoGols}" />
+                </p:column>
+            </p:dataTable>
+        </p:dialog>
+    </h:form>
+    
 </h:body>
 </html>

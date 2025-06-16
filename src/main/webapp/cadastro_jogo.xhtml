@@ -18,12 +18,12 @@
             display: flex;
             justify-content: center; 
             align-items: center;   
-            padding: 20px; /* Adiciona um espaçamento */
+            padding: 30px; 
             min-height: 90vh;
         }
         
         .content-panel {
-            width: 700px; /* Largura maior para o formulário de jogo */
+            width: 1200px; 
         }
     </style>
 </h:head>
@@ -78,7 +78,6 @@
                     <div style="display: flex; justify-content: space-between;">
                         <div>
                             <p:button value="Voltar para Opções" outcome="opcoes" icon="pi pi-arrow-left" styleClass="ui-button-secondary" />
-<!--                             <p:button value="Ver Listagem" outcome="listagem" icon="pi pi-list" styleClass="ui-button-info" style="margin-left: 5px;" /> -->
                         </div>
                         
                         <p:commandButton value="Salvar Jogo" action="#{jogoBean.salvar}"
