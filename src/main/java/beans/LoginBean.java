@@ -18,11 +18,11 @@ public class LoginBean {
     public String entrar() {
         usuarioLogado = UsuarioDAO.findByLoginSenha(login, senha);
         if (usuarioLogado != null) {
-            return "opcoes?faces-redirect=true"; // Sucesso
+            return "opcoes?faces-redirect=true"; 
         } else {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Login ou senha inválidos."));
-            return null; // Falha, permanece no login
+            return null; 
         }
     }
     

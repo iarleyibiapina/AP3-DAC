@@ -78,7 +78,7 @@ public class UsuarioDAO {
                      .setParameter("senha", senha)
                      .getSingleResult();
         } catch (Exception e) {
-            return null; // Retorna null se não encontrar
+            return null; 
         } finally {
             em.close();
         }

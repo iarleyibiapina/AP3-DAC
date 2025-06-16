@@ -1,5 +1,7 @@
 package DTOs;
 
+// Uma classe para reunir e transferir dados, nesse contexto ira armazenar a logica
+// para o resumo de jogos de um time.
 public class ResumoTimeDTO {
     private String nome;
     private int pontuacao;
@@ -9,6 +11,10 @@ public class ResumoTimeDTO {
     private int golsMarcados;
     private int golsSofridos;
     private int saldoGols;
+    
+    public ResumoTimeDTO(String nome) {
+        this.nome = nome;
+    }
     
 	public ResumoTimeDTO(String nome, int pontuacao, int vitorias, int derrotas, int empates, int golsMarcados,
 			int golsSofridos, int saldoGols) {
